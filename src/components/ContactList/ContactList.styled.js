@@ -6,4 +6,5 @@ export const ListContact = styled.ul`
 
 export const ContactItem = styled.li`
   font-size: inherit;
+  line-height: 150%;
 `;

@@ -1,6 +1,6 @@
 import { Component } from 'react';
-
 import { nanoid } from 'nanoid';
+
 import {
   FormContact,
   AddContact,
@@ -11,7 +11,7 @@ import {
 export class ContactForm extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    console.log();
   }
   NameInput = nanoid(3);
   TelInput = nanoid(3);

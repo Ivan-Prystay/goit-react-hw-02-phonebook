@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
+import { Filter } from './Filter/Filter';
 
 export class App extends Component {
   state = {
@@ -13,30 +14,48 @@ export class App extends Component {
     ],
     name: '',
     number: '',
+    filter: '',
   };
 
   handleChange = event => {
     const { name, value } = event.currentTarget;
-
     this.setState({ [name]: value });
   };
 
   handleSubmit = event => {
     event.preventDefault();
+    const { name, number } = this.state;
+    const contact = {
+      id: `id-${nanoid(2)}`,
+      name,
+      number,
+    };
 
-    const { name, number, contacts } = this.state;
+    if (
+      this.state.contacts.find(
+        option => option.name.toLowerCase() === contact.name.toLowerCase()
+      )
+    ) {
+      alert(`A contact with the name ${contact.name} already exists.`);
+      this.reset();
+      return;
+    }
 
-    contacts.push({
-      id: nanoid(),
-      name: name,
-      number: number,
-    });
-
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, contact],
+    }));
     this.reset();
   };
 
+  filterContact = () => {
+    const { contacts, filter } = this.state;
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
   reset = () => {
-    this.setState({ name: '', number: '' });
+    this.setState({ name: '', number: '', filter: '' });
   };
 
   render() {
@@ -55,8 +74,12 @@ export class App extends Component {
           handleSubmit={this.handleSubmit}
         />
         <h2>Contacts</h2>
-        <ContactList contacts={this.state.contacts} />
-        {/* <Filter ... /> */}
+        <Filter filter={this.state.filter} handleChange={this.handleChange} />
+        <ContactList
+          filterContact={this.filterContact()}
+          contacts={this.state.contacts}
+          filter={this.state.filter}
+        />
       </div>
     );
   }

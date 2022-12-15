@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const FormContact = styled.form`
   border: 1px solid;
-
   display: flex;
   flex-direction: column;
   width: 320px;
