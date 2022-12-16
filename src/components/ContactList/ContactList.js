@@ -4,11 +4,6 @@ import { Contact } from 'components/Contact/Contact';
 import { ListContact } from './ContactList.styled';
 
 export class ContactList extends Component {
-  constructor(props) {
-    super(props);
-    console.log('props ContactList', props);
-  }
-
   render() {
     const { filterContact, contacts, deleteContact } = this.props;
 

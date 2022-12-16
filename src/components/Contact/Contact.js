@@ -2,10 +2,6 @@ import { Component } from 'react';
 import { ContactItem, DeleteContact } from './Contact.styled';
 
 export class Contact extends Component {
-  constructor(props) {
-    super(props);
-    console.log('props Contact', props);
-  }
   render() {
     const { id, name, number } = this.props.contact;
     return (

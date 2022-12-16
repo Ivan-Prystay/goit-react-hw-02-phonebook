@@ -4,11 +4,6 @@ import { nanoid } from 'nanoid';
 import { Container, FilterInput } from './Filter.styled';
 
 export class Filter extends Component {
-  constructor(props) {
-    super(props);
-    console.log('props Filter', props);
-  }
-
   FilterInput = nanoid(3);
 
   render() {
