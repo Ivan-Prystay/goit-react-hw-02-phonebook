@@ -8,22 +8,20 @@ export class ContactList extends Component {
     super(props);
     console.log('props ContactList', props);
   }
+
   render() {
+    const { filterContact, contacts, deleteContact } = this.props;
+
+    let arr = filterContact;
+    if (!filterContact) {
+      arr = contacts;
+    }
+
     return (
       <ListContact>
-        {!this.props.filterContact
-          ? this.props.contacts.map(item => (
-              <Contact
-                contact={item}
-                deleteContact={this.props.deleteContact}
-              />
-            ))
-          : this.props.filterContact.map(item => (
-              <Contact
-                contact={item}
-                deleteContact={this.props.deleteContact}
-              />
-            ))}
+        {arr.map(item => (
+          <Contact key={item.id} contact={item} deleteContact={deleteContact} />
+        ))}
       </ListContact>
     );
   }

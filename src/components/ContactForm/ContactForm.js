@@ -11,7 +11,7 @@ import {
 export class ContactForm extends Component {
   constructor(props) {
     super(props);
-    console.log();
+    console.log('ContactForm props', props);
   }
   NameInput = nanoid(3);
   TelInput = nanoid(3);

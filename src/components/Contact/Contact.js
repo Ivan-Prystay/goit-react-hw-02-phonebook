@@ -13,7 +13,6 @@ export class Contact extends Component {
         {name}
         {': '}
         {number}
-
         <DeleteContact
           type="button"
           onClick={() => this.props.deleteContact(id)}
