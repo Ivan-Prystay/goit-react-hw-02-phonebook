@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ContactItem, DeleteContact } from './Contact.styled';
 
 export class Contact extends Component {
@@ -19,3 +20,8 @@ export class Contact extends Component {
     );
   }
 }
+
+Contact.propTypes = {
+  contact: PropTypes.object.isRequired,
+  deleteContact: PropTypes.func.isRequired,
+};

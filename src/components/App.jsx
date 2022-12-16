@@ -12,45 +12,39 @@ export class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    name: '',
-    number: '',
+
     filter: '',
   };
 
   handleChange = event => {
+    event.preventDefault();
     const { name, value } = event.currentTarget;
     this.setState({ [name]: value });
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
-    const { name, number } = this.state;
+  addContact = ({ name, number }) => {
     const contact = {
       id: `id-${nanoid(2)}`,
       name,
       number,
     };
+    const { contacts } = this.state;
 
-    if (
-      this.state.contacts.find(
-        option => option.name.toLowerCase() === contact.name.toLowerCase()
-      )
-    ) {
+    if (contacts.find(item => item.name.toLowerCase() === name.toLowerCase())) {
       alert(`A contact with the name ${contact.name} already exists.`);
-      this.reset();
+
       return;
     }
 
     this.setState(prevState => ({
       contacts: [...prevState.contacts, contact],
     }));
-    this.reset();
   };
 
   filterContact = () => {
     const { contacts, filter } = this.state;
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
+    return contacts.filter(item =>
+      item.name.toLowerCase().includes(filter.toLowerCase())
     );
   };
 
@@ -58,10 +52,6 @@ export class App extends Component {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
-  };
-
-  reset = () => {
-    this.setState({ name: '', number: '', filter: '' });
   };
 
   render() {
@@ -74,10 +64,7 @@ export class App extends Component {
         <h1>Phonebook</h1>
         <ContactForm
           contacts={this.state.contacts}
-          name={this.state.name}
-          number={this.state.number}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
+          onSubmit={this.addContact}
         />
         <h2>Contacts</h2>
         <Filter filter={this.state.filter} handleChange={this.handleChange} />
