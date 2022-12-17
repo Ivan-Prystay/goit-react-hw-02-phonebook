@@ -14,6 +14,7 @@ export class Filter extends Component {
         <FilterInput
           type="text"
           name="filter"
+          autoComplete="off"
           required
           onChange={this.props.handleChange}
           value={this.props.filter}
